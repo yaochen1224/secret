@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Secret</string>
+    <string name = "error_msg">Sorry, no secret found</string>
 </resources>

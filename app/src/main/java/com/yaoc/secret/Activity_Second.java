@@ -1,5 +1,6 @@
 package com.yaoc.secret;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -17,8 +18,11 @@ public class Activity_Second extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__second);
 
+        Intent intent = getIntent();
+        String farget = intent.getStringExtra("target");
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("secret");
+        DatabaseReference myRef = database.getReference(farget).child("secret");
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -29,7 +33,12 @@ public class Activity_Second extends AppCompatActivity {
                 String value = dataSnapshot.getValue(String.class);
 
                 TextView textView = (TextView)findViewById(R.id.secretDisplay);
-                textView.setText(value);
+                if(value != null){
+                    textView.setText(value);
+                } else{
+                    textView.setText(getResources().getString(R.string.error_msg));
+                }
+
             }
 
             @Override

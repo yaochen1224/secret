@@ -27,10 +27,15 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText)findViewById(R.id.editTest);
         String userSecret = editText.getText().toString();
         myRef.setValue(userSecret);
+
+        user.setText("");
+        editText.setText("");
     }
 
     public void reveal(View view) {
         Intent intent = new Intent(this, Activity_Second.class);
+        EditText target = (EditText)findViewById(R.id.target);
+        intent.putExtra("target", target.getText().toString());
         startActivity(intent);
     }
 }
