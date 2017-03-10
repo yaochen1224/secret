@@ -19,7 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void save(View view) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("secret");
+
+        EditText user = (EditText)findViewById(R.id.name);
+        String username = user.getText().toString();
+        DatabaseReference myRef = database.getReference(username).child("secret");
 
         EditText editText = (EditText)findViewById(R.id.editTest);
         String userSecret = editText.getText().toString();
